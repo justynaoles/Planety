@@ -83,10 +83,10 @@
                     var a = a.children[index].getAttribute('data-order');
                     var b = b.children[index].getAttribute('data-order');
      
-        if(a<b) {
+        if(a>b) {
             return order === 'sortdown' ? 1 : -1;
             } 
-        else if(a>b) {
+        else if(a<b) {
             return order === 'sortdown' ? -1 : 1;
             } 
         else {
