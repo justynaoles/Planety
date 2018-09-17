@@ -39,7 +39,7 @@
         function sortBy(e) {
 
             var target = e.target;
-            var classname = target.classList.contains("integer");
+            var classname = target.classList.contains('integer');
             var attribute = target.hasAttribute('data-order');
             var thArr = makeArray(tableheaders);
             var index = thArr.indexOf(target);
@@ -70,7 +70,9 @@
                 return 0;
                 }
 
-            });      
+            });   
+                
+                 
         }
             
             
@@ -92,6 +94,9 @@
             }
      
                 });
+                
+              
+               
             }
             
     //pozostałe sortowanie np. alfabetycznie
@@ -113,7 +118,11 @@
                 }
  
            
-                });}
+                });
+            
+                
+                
+            }
 
 
     //po sortowaniu muszę wstawić elementy wg nowego porządku do dokumentu   
