@@ -5,10 +5,9 @@
         var tableheaders = thead.querySelectorAll('th'); /*nagłówki tabeli*/
         var tbody = document.querySelector('tbody');
         var lines = tbody.querySelectorAll('tbody tr');  /*wiersze tabeli*/
-        var h1 = document.querySelector('h1');
         
         
-        // funkcja czyści jakiekolwiek dodane klasy już
+        // funkcja czyści  dodane wcześniej klasy
            function remove(nodeList){
                 for (var x = 0; x<nodeList.length; x++){
                     nodeList[x].classList.remove('sortdown');
@@ -53,68 +52,70 @@
          remove(tableheaders); //usunięcie klas z nagłowka tabeli za pomocą funkcji linia 11
          remove(td); //usunięcie klas z wierszy tabeli za pomocą funkcji linia 11
             
-   //warunek sprawdza czy mamy klase  integer
+    //warunek sprawdza czy mamy klase  integer
             if(classname) {
                 
-                trArr.sort(function (a,b) {
+                    trArr.sort(function (a,b) {
                     var a = a.children[index].textContent;
                     var b = b.children[index].textContent;
-                                         
+    
                     
-            if(parseInt(a) < parseInt(b)) {
-            return order === 'sortdown' ? 1 : -1;
-        } else if(parseInt(a) > parseInt(b)) {
+            if(parseFloat(a) < parseFloat(b)) {
             return order === 'sortdown' ? -1 : 1;
-        } else {
-            return 0;
-        }
-   
-                });
-            }
-            
-            
-    //sprawdzam czy nie posiada atrybutu 'data-order'  
-               else if (!attribute) {
-                
-                         trArr.sort(function (a,b) {
-                    var a = a.children[index].textContent;
-                    var b = b.children[index].textContent;
-                   
-                    
-                    
-                if(a<b) {
-            return order === 'sortdown' ? 1 : -1;
-        } else if(a>b) {
-            return order === 'sortdown' ? -1 : 1;
-        } else {
-            return 0;
-        }
-                         });
-            
-            }
-            
-
-    //pozostałe sortowanie czyli alfabetycznie        
+            } 
+            else if(parseFloat(a) > parseFloat(b)) {
+                return order === 'sortdown' ? 1 : -1;
+                } 
             else {
-                
-                         trArr.sort(function (a,b) {
+                return 0;
+                }
+
+            });      
+        }
+            
+            
+    //sprawdzam czy posiada atrybut 'data-order'  
+            else if (attribute)  {
+   
+                    trArr.sort(function (a,b) {
                     var a = a.children[index].getAttribute('data-order');
                     var b = b.children[index].getAttribute('data-order');
-                   
-                    
-                    
-                                 if(a<b) {
+     
+        if(a<b) {
             return order === 'sortdown' ? 1 : -1;
-        } else if(a>b) {
+            } 
+        else if(a>b) {
             return order === 'sortdown' ? -1 : 1;
-        } else {
+            } 
+        else {
             return 0;
-        }
+            }
      
                 });
-   
             }
             
+    //pozostałe sortowanie np. alfabetycznie
+            
+            else {    
+                
+                trArr.sort(function (a,b) {
+                var a = a.children[index].textContent;
+                var b = b.children[index].textContent;
+
+            if(a<b) {
+                return order === 'sortdown' ? 1 : -1;
+                    } 
+            else if(a>b) {
+                return order === 'sortdown' ? -1 : 1;
+                    } 
+            else {
+                return 0;
+                }
+ 
+           
+                });}
+
+
     //po sortowaniu muszę wstawić elementy wg nowego porządku do dokumentu   
     trArr.forEach(function(tr) {
         df.appendChild(tr);
@@ -136,7 +137,4 @@
         }         
 })();
  
-   
-                
-    
-        
+
